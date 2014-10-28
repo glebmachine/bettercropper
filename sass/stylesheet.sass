@@ -1,0 +1,133 @@
+@import "compass"
+@import "compass/css3"
+@import "compass/css3/transition"
+@import "compass/css3/user-interface"
+
+body, html
+  background : #eee
+  height : 100%
+  margin : 0
+
+
+.preview
+  overflow: hidden
+  float : left
+  margin-top : 20px
+  margin-right : 20px
+
+.links
+  a
+    margin-right : 20px
+
+    &.active
+      color : red
+
+.buttons
+  clear : both
+  padding : 20px 0
+  text-align : right
+
+  .button
+    +inline-block
+    margin : 0 0 0 20px
+    cursor : pointer
+    +border-radius(2px)
+    border : 1px solid #666
+    padding : 5px 10px
+    background : white
+    +transition(background .3s ease)
+
+    &:hover
+      background : #ddd
+
+
+.section
+  position : relative
+  height : 100%
+  width : 100%
+
+
+/// popup
+.popup
+  position : fixed
+  top : 0
+  left : 0
+  bottom : 0
+  right : 0
+  z-index : 1000
+
+  .background
+    position : absolute
+    z-index : 1001
+    background : #000
+    +opacity(.7)
+    top : 0
+    left : 0
+    bottom : 0
+    right : 0
+
+  .playout
+    position : absolute
+    top : 50%
+    left : 50%
+    text-align : left !important
+    z-index : 1002
+    background : white
+    padding : 20px
+
+    h1
+      font-size : 22px
+      color : #000
+      border-bottom : 1px solid #000
+      line-height : 60px
+      padding-left : 30px
+      padding-top : 0 !important
+
+  .cross
+    position : absolute
+    text-align: center
+    width : 30px
+    height : 30px
+    line-height : 30px
+    font-family: Arial
+    background : white
+    +border-radius(20px)
+    right : -40px
+    top : -40px
+    cursor : pointer
+    z-index : 1001
+    +transition(background .3s ease)
+
+    &:hover
+      background : #ccc
+
+  .scroll
+    position : absolute
+    top : 0
+    left : 0
+    bottom : 0
+    right : 0
+    z-index : 1002
+
+    &.active
+      overflow-y : scroll
+
+  .playout
+    position : absolute
+    width : 600px
+    top : 50%
+    left : 50%
+    background : #fff
+    text-align : left
+    +transition(transform .2s ease, opacity .2s ease)
+    +scale(1)
+    +opacity(1)
+    font-size : 14px
+
+  &.opening,
+  &.closing
+    .playout
+      +opacity(0)
+      +scale(.8)
+    .background
+      +opacity(0)

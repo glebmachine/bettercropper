@@ -1,0 +1,457 @@
+.cropper-container {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.cropper-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.cropper-container > img {
+  width: 100%;
+  height: 100%;
+}
+
+.cropper-modal,
+.cropper-canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.cropper-canvas {
+  background-color: #fff;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.cropper-modal {
+  background-color: #000;
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.cropper-dragger {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+.cropper-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #69f;
+  outline-color: rgba(51, 102, 255, .75);
+}
+
+.cropper-viewer > img {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.cropper-dashed {
+  position: absolute;
+  display: block;
+  filter: alpha(opacity=50);
+  border: 0 dashed #fff;
+  opacity: .5;
+}
+
+.cropper-dashed.dashed-h {
+  top: 33.3%;
+  left: 0;
+  width: 100%;
+  height: 33.3%;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.cropper-dashed.dashed-v {
+  top: 0;
+  left: 33.3%;
+  width: 33.3%;
+  height: 100%;
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+.cropper-face,
+.cropper-line,
+.cropper-point {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: alpha(opacity=10);
+  opacity: .1;
+}
+
+.cropper-face {
+  top: 0;
+  left: 0;
+  cursor: move;
+  background-color: #fff;
+}
+
+.cropper-line {
+  background-color: #69f;
+}
+
+.cropper-line.line-e {
+  top: 0;
+  right: -3px;
+  width: 5px;
+  cursor: e-resize;
+}
+
+.cropper-line.line-n {
+  top: -3px;
+  left: 0;
+  height: 5px;
+  cursor: n-resize;
+}
+
+.cropper-line.line-w {
+  top: 0;
+  left: -3px;
+  width: 5px;
+  cursor: w-resize;
+}
+
+.cropper-line.line-s {
+  bottom: -3px;
+  left: 0;
+  height: 5px;
+  cursor: s-resize;
+}
+
+.cropper-point {
+  width: 5px;
+  height: 5px;
+  background-color: #69f;
+  filter: alpha(opacity=75);
+  opacity: .75;
+}
+
+.cropper-point.point-e {
+  top: 50%;
+  right: -3px;
+  margin-top: -3px;
+  cursor: e-resize;
+}
+
+.cropper-point.point-n {
+  top: -3px;
+  left: 50%;
+  margin-left: -3px;
+  cursor: n-resize;
+}
+
+.cropper-point.point-w {
+  top: 50%;
+  left: -3px;
+  margin-top: -3px;
+  cursor: w-resize;
+}
+
+.cropper-point.point-s {
+  bottom: -3px;
+  left: 50%;
+  margin-left: -3px;
+  cursor: s-resize;
+}
+
+.cropper-point.point-ne {
+  top: -3px;
+  right: -3px;
+  cursor: ne-resize;
+}
+
+.cropper-point.point-nw {
+  top: -3px;
+  left: -3px;
+  cursor: nw-resize;
+}
+
+.cropper-point.point-sw {
+  bottom: -3px;
+  left: -3px;
+  cursor: sw-resize;
+}
+
+.cropper-point.point-se {
+  right: -3px;
+  bottom: -3px;
+  width: 20px;
+  height: 20px;
+  cursor: se-resize;
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.cropper-point.point-se:before {
+  position: absolute;
+  right: -50%;
+  bottom: -50%;
+  display: block;
+  width: 200%;
+  height: 200%;
+  content: " ";
+  background-color: #69f;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+@media (min-width: 768px) {
+  .cropper-point.point-se {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cropper-point.point-se {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cropper-point.point-se {
+    width: 5px;
+    height: 5px;
+    filter: alpha(opacity=75);
+    opacity: .75;
+  }
+}
+
+/* Helper classes for JavaScript */
+
+.cropper-hidden {
+  display: none !important;
+}
+
+.cropper-invisible {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.cropper-move {
+  cursor: move;
+}
+
+.cropper-crop {
+  cursor: crosshair;
+}
+
+.cropper-disabled .cropper-canvas,
+.cropper-disabled .cropper-face,
+.cropper-disabled .cropper-line,
+.cropper-disabled .cropper-point {
+  cursor: not-allowed;
+}
+
+/* line 6, ../sass/stylesheet.sass */
+body, html {
+  background: #eeeeee;
+  height: 100%;
+  margin: 0;
+}
+
+/* line 12, ../sass/stylesheet.sass */
+.preview {
+  overflow: hidden;
+  float: left;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+/* line 19, ../sass/stylesheet.sass */
+.links a {
+  margin-right: 20px;
+}
+/* line 22, ../sass/stylesheet.sass */
+.links a.active {
+  color: red;
+}
+
+/* line 25, ../sass/stylesheet.sass */
+.buttons {
+  clear: both;
+  padding: 20px 0;
+  text-align: right;
+}
+/* line 30, ../sass/stylesheet.sass */
+.buttons .button {
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  zoom: 1;
+  *display: inline;
+  margin: 0 0 0 20px;
+  cursor: pointer;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #666666;
+  padding: 5px 10px;
+  background: white;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+/* line 40, ../sass/stylesheet.sass */
+.buttons .button:hover {
+  background: #dddddd;
+}
+
+/* line 44, ../sass/stylesheet.sass */
+.section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* line 51, ../sass/stylesheet.sass */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+}
+/* line 59, ../sass/stylesheet.sass */
+.popup .background {
+  position: absolute;
+  z-index: 1001;
+  background: black;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+/* line 69, ../sass/stylesheet.sass */
+.popup .playout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: left !important;
+  z-index: 1002;
+  background: white;
+  padding: 20px;
+}
+/* line 78, ../sass/stylesheet.sass */
+.popup .playout h1 {
+  font-size: 22px;
+  color: black;
+  border-bottom: 1px solid black;
+  line-height: 60px;
+  padding-left: 30px;
+  padding-top: 0 !important;
+}
+/* line 86, ../sass/stylesheet.sass */
+.popup .cross {
+  position: absolute;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-family: Arial;
+  background: white;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  right: -40px;
+  top: -40px;
+  cursor: pointer;
+  z-index: 1001;
+  -webkit-transition: background 0.3s ease;
+  -moz-transition: background 0.3s ease;
+  -o-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+/* line 101, ../sass/stylesheet.sass */
+.popup .cross:hover {
+  background: #cccccc;
+}
+/* line 104, ../sass/stylesheet.sass */
+.popup .scroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1002;
+}
+/* line 112, ../sass/stylesheet.sass */
+.popup .scroll.active {
+  overflow-y: scroll;
+}
+/* line 115, ../sass/stylesheet.sass */
+.popup .playout {
+  position: absolute;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  background: white;
+  text-align: left;
+  -webkit-transition: -webkit-transform 0.2s ease, opacity 0.2s ease;
+  -moz-transition: -moz-transform 0.2s ease, opacity 0.2s ease;
+  -o-transition: -o-transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  -webkit-transform: scale(1, 1);
+  -moz-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  -o-transform: scale(1, 1);
+  transform: scale(1, 1);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  font-size: 14px;
+}
+/* line 129, ../sass/stylesheet.sass */
+.popup.opening .playout, .popup.closing .playout {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -webkit-transform: scale(0.8, 0.8);
+  -moz-transform: scale(0.8, 0.8);
+  -ms-transform: scale(0.8, 0.8);
+  -o-transform: scale(0.8, 0.8);
+  transform: scale(0.8, 0.8);
+}
+/* line 132, ../sass/stylesheet.sass */
+.popup.opening .background, .popup.closing .background {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}

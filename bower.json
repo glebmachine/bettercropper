@@ -1,0 +1,10 @@
+{
+  "name": "cropper",
+  "description": "cropper",
+  "main": "dist/bettercropper.js",
+  "version": "0.0.0",
+  "dependencies": {
+    "cropper": "~0.7.0",
+    "imagesloaded": "~3.1.8"
+  }
+}
